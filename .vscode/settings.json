@@ -1,3 +1,4 @@
 {
-    "python.venvPath": "\\venv\\Scripts\\python.exe"
+    "python.venvPath": "\\venv\\Scripts\\python.exe",
+    "python.linting.enabled": true
 }
