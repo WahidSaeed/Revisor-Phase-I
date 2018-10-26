@@ -64,5 +64,23 @@
 
 # process_content()
 
-#-------------------- Word lemmatizer --------------------#
+#-------------------- NaiveBayesClassifier --------------------#
+# import nltk
+# from nltk.corpus import names
+# import random
 
+# def gender_feature(input_text):
+#     return {'last_letter': input_text[-1]}
+
+# labeled_names = [(name, 'male') for name in names.words('male.txt')] + [(name, 'female') for name in names.words('female.txt')]
+# random.shuffle(labeled_names)
+
+# featuresets = [(gender_feature(n), gender) for (n, gender) in labeled_names]
+# train_set, test_set = featuresets[500:], featuresets[:500]
+# classifier = nltk.NaiveBayesClassifier.train(train_set)
+
+# input_text = ''
+# while input_text != 'Quit':
+#     input_text = input('Enter a name to be classified: ')
+#     print('Gender: ' + classifier.classify(gender_feature(input_text)))
+#     print('Modal Accuracy: ' + str(nltk.classify.accuracy(classifier, test_set)))
