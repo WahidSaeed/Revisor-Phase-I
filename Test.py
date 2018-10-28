@@ -64,7 +64,7 @@
 
 # process_content()
 
-#-------------------- NaiveBayesClassifier --------------------#
+#-------------------- NaiveBayes Classifier --------------------#
 # import nltk
 # from nltk.corpus import names
 # import random
@@ -75,12 +75,50 @@
 # labeled_names = [(name, 'male') for name in names.words('male.txt')] + [(name, 'female') for name in names.words('female.txt')]
 # random.shuffle(labeled_names)
 
-# featuresets = [(gender_feature(n), gender) for (n, gender) in labeled_names]
-# train_set, test_set = featuresets[500:], featuresets[:500]
+# #featuresets = [(gender_feature(n), gender) for (n, gender) in labeled_names]
+# test_set = nltk.classify.apply_features(gender_feature, labeled_names[:500])
+# train_set = nltk.classify.apply_features(gender_feature, labeled_names[500:])
 # classifier = nltk.NaiveBayesClassifier.train(train_set)
+# print('Modal Accuracy: ' + str(nltk.classify.accuracy(classifier, test_set)))
 
 # input_text = ''
 # while input_text != 'Quit':
 #     input_text = input('Enter a name to be classified: ')
 #     print('Gender: ' + classifier.classify(gender_feature(input_text)))
-#     print('Modal Accuracy: ' + str(nltk.classify.accuracy(classifier, test_set)))
+
+#-------------------- NaiveBayes Classifier (with more than one feature) --------------------#
+
+# import nltk
+# import random
+# from nltk.corpus import names
+
+# def gender_feature(input_text):
+#     return {
+#         "Suffix1" : input_text[-1:],
+#         "Suffix2" : input_text[-2:],
+#     }
+
+# labeled_names = [(name, 'male') for name in names.words('male.txt')] + [(name, 'female') for name in names.words('female.txt')]
+# random.shuffle(labeled_names)
+# featuresets = nltk.classify.apply_features(gender_feature, labeled_names)
+# train_set, test_set = featuresets[500:], featuresets[:500]
+# classifier = nltk.NaiveBayesClassifier.train(train_set)
+
+# print(nltk.classify.accuracy(classifier, test_set))
+
+#-------------------- Document Classification --------------------#
+
+# from nltk.corpus import movie_reviews
+# import random
+# from nltk import FreqDist
+
+# documents = [(list(movie_reviews.words(fileid)), category)
+#                 for category in movie_reviews.categories() 
+#                     for fileid in movie_reviews.fileids(category)]
+
+# random.shuffle(documents)
+# all_words = FreqDist([word.lower() for word in movie_reviews.words()])
+# print(all_words)
+
+from nltk.classify.scikitlearn import  SklearnClassifier
+from sklearn.naive_bayes import MultinomialNB, GaussianNB, BernoulliNB
