@@ -108,6 +108,7 @@
 
 #-------------------- Document Classification --------------------#
 
+# import nltk
 # from nltk.corpus import movie_reviews
 # import random
 # from nltk import FreqDist
@@ -118,7 +119,23 @@
 
 # random.shuffle(documents)
 # all_words = FreqDist([word.lower() for word in movie_reviews.words()])
-# print(all_words)
 
-from nltk.classify.scikitlearn import  SklearnClassifier
-from sklearn.naive_bayes import MultinomialNB, GaussianNB, BernoulliNB
+# word_features = list(all_words.keys())[:3000]
+
+# def find_features(document):
+#     words = set(document)
+#     features = {}
+#     for w in word_features:
+#         features[w] = w in words
+#     return features
+
+
+# featureset = [(find_features(w), category) for (w, category) in documents]
+# train_set = featureset[:1900]
+# test_set = featureset[1900:]
+
+## posterior = (prior occurences * liklihood) / evidence
+# classifier = nltk.NaiveBayesClassifier.train(train_set)
+
+# print(nltk.classify.accuracy(classifier ,test_set))
+
