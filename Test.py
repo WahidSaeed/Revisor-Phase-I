@@ -139,3 +139,51 @@
 
 # print(nltk.classify.accuracy(classifier ,test_set))
 
+#-------------------- Save Classifier Using Pickle --------------------#
+
+# import nltk
+# from nltk.corpus import (movie_reviews, stopwords)
+# import random
+# from nltk import FreqDist
+# from nltk.classify.scikitlearn import SklearnClassifier
+# import pickle
+# import os
+
+# stopWords = set(stopwords.words('english'))
+# all_words = FreqDist([word.lower() for word in movie_reviews.words() if word not in stopWords])
+# word_features = list(all_words.keys())[:3000]
+
+# def find_features(document):
+#         words = set(document)
+#         features = {}
+#         for w in word_features:
+#             features[w] = w in words
+#         return features
+
+# if os.path.isfile("naivebayes.pickle"):
+#     with open("naivebayes.pickle", "rb") as save_classifier:
+#         classifier = pickle.load(save_classifier)
+#     with open("naivebayes_testset.pickle", "rb") as save_test_set:
+#         test_set = pickle.load(save_test_set)
+#     #print(nltk.classify.accuracy(classifier, test_set))
+#     print(classifier.show_most_informative_features(5))
+#     text = input("Enter a text to be classified: ")
+#     while text != "Quit":
+#         print(classifier.classify(find_features(text)))
+#         text = input("Enter a text to be classified: ")
+# else:
+#     documents = [(list([word for word in movie_reviews.words(fileid) if word not in stopWords]), category)
+#                     for category in movie_reviews.categories() 
+#                         for fileid in movie_reviews.fileids(category)]
+
+#     random.shuffle(documents)
+#     featureset = [(find_features(w), category) for (w, category) in documents]
+#     train_set = featureset[:1900]
+#     test_set = featureset[1900:]
+#     # posterior = (prior occurences * liklihood) / evidence
+#     classifier = nltk.NaiveBayesClassifier.train(train_set)
+#     print(nltk.classify.accuracy(classifier ,test_set))
+#     with open("naivebayes.pickle", "wb") as save_classifier:
+#         pickle.dump(classifier, save_classifier)
+#     with open("naivebayes_testset.pickle", "wb") as save_test_set:
+#         pickle.dump(test_set, save_test_set)
